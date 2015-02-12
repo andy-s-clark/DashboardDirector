@@ -11,7 +11,7 @@ logs are stored so that you know who, what, where, when, and why something was d
 Quickstart
 ----------
 
-These steps are designed to get you rolling quickly, but more complete install/setup information is provided in our `documentation
+Coming Soon
 
 Authors
 -------
