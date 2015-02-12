@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+{% load i18n %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li class="active">{% trans 'PROJECTS' %}</li>
+    </ol>
+{% endblock breadcrumb %}
+
+{% block content %}
+
+    <h1>All {% trans 'PROJECTS' %} <a href="{% url 'projects_project_create' %}" class="btn btn-default btn-sm pull-right"><i class="glyphicon glyphicon-plus-sign"></i> Add {% trans 'PROJECTS' %}</a></h1>
+    {% render_table table %}
+
+{% endblock content %}

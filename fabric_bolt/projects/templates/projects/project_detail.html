@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+{% load i18n %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{% url 'projects_project_list' %}">{% trans 'PROJECTS' %}</a></li>
+        <li class="active">{{ object.name }}</li>
+    </ol>
+{% endblock breadcrumb %}
+
+{% block content %}
+    <div class="row">
+        <h1 style="margin-bottom:30px;" class="col-lg-12">{% trans 'PROJECT' %} {{ object.name }}
+            <span class="pull-right">
+                <a class="btn btn-primary" href="{% url 'projects_project_update' object.pk %}">{% trans 'EDIT' %} {% trans 'PROJECT' %}</a>
+                <a class="btn btn-danger" href="{% url 'projects_project_delete' object.pk %}">{% trans 'DELETE' %} {% trans 'PROJECT' %}</a>
+            </span>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="well well-sm">
+                <div>
+                    {% trans 'DESC' %}: {{ object.description }}
+                </div>
+                <div>{% trans 'DEPLOYMENTS' %}: {{ object.get_deployment_count }}</div>
+                <div><a href="{% url 'projects_project_invalidate_cache' object.pk %}">Invalidate tasks cache</a></div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="well well-sm">
+                <div class="list-group">
+                    {% for stage in stages %}
+                        <a href="{% url 'projects_stage_view' object.pk stage.pk %}" class="list-group-item">
+                            <span class="badge" data-toggle="tooltip" data-delay="{ 'show': 300, 'hide': 0 }" data-original-title="Number of configurations">{{ stage.stage_configurations.count }}</span>
+                            {{ stage.name }}
+                        </a>
+                    {% empty %}
+                        <div class="list-group-item">{% trans 'NOSTAGE' %}</div>
+                    {% endfor %}
+                </div>
+
+                <div>
+                    <a class="btn btn-default btn-sm" href="{% url 'projects_stage_create' object.pk %}">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                        {% trans 'ADD' %} {% trans 'STAGE' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        {% trans 'PROJECT' %} Configuration
+                        <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-delay="{ 'show': 300, 'hide': 0 }"
+                           data-original-title="Configurations added here will be added to fab's env variable"></i>
+                    </h4>
+                </div>
+
+                <div class="panel-body">
+                    {% render_table configurations %}
+
+                </div>
+
+                <div class="panel-footer">
+                    <a class="btn btn-default btn-sm" href="{% url 'projects_configuration_create' object.pk %}">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                        {% trans 'ADD' %} {% trans 'CONFIG' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        {% trans 'STAGES' %}
+                        <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-delay="{ 'show': 300, 'hide': 0 }"
+                           data-original-title="Stages allow you to configure hosts and custom configurations. You will deploy to a stage."></i>
+                    </h4>
+                </div>
+
+                <div class="panel-body">
+                    {% render_table stage_table %}
+                </div>
+
+                <div class="panel-footer">
+                    <a class="btn btn-default btn-sm" href="{% url 'projects_stage_create' object.pk %}">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                        {% trans 'ADD' %} {% trans 'STAGE' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        {% trans 'PROJECT' %} Hooks
+                        <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-delay="{ 'show': 300, 'hide': 0 }"
+                           data-original-title="Hooks allow you to specify a URL to be notified when a deployment is run"></i>
+                    </h4>
+                </div>
+
+                <div class="panel-body">
+                    {% render_table hook_table %}
+                </div>
+
+                <div class="panel-footer">
+                    <a class="btn btn-default btn-sm" href="{% url 'hooks_hook_create_with_project' object.pk %}">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                        {% trans 'ADD' %} {% trans 'HOOK' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4>
+                        {% trans 'RECENT' %} {% trans 'DEPLOYMENTS' %}
+                        <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-delay="{ 'show': 300, 'hide': 0 }"
+                           data-original-title="See what was shipped out when, and the status of each attempt."></i>
+                    </h4>
+                </div>
+
+                <div class="panel-body">
+                    {% render_table deployment_table %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

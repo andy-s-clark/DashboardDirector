@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{% url 'projects_project_list' %}">{% trans 'PROJECTS' %}</a></li>
+        <li class="active">Add {% trans 'PROJECT' %}</li>
+    </ol>
+{% endblock breadcrumb %}
+
+{% block content %}
+    <h1>Copy {% trans 'PROJECT' %}</h1>
+
+    {% crispy form %}
+
+{% endblock %}

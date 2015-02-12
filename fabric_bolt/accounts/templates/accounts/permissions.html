@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <h1 style="margin-bottom:30px;">User Permissions</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>{% trans 'ACTION' %}</th>
+                    <th>{% trans 'HISTORIAN' %}</th>
+                    <th>{% trans 'DEPLOYER' %}</th>
+                    <th>{% trans 'ADMIN' %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{% trans 'VIEW' %} {% trans 'DEPLOYMENT' %} {% trans 'HISTORY' %}</td>
+                    <td class="permission-x">✓</td>
+                    <td class="permission-x">✓</td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'EDIT' %} {% trans 'STAGE' %}</td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'EDIT' %} {% trans 'PROJECT' %}</td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'DEPLOY' %} {% trans 'STAGE' %}</td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'CREATE' %} {% trans 'HOST' %}</td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'VIEW' %} {% trans 'HOSTS' %}</td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'UPDT' %} {% trans 'AND' %} {% trans 'DELETE' %} {% trans 'HOSTS' %}</td>
+                    <td></td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'ADD' %} {% trans 'NEW' %} {% trans 'TEAM' %}</td>
+                    <td></td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'CREATE' %} {% trans 'PROJECT' %} {% trans 'STAGE' %}</td>
+                    <td></td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'REMOVE' %} {% trans 'PROJECT' %} {% trans 'STAGE' %}</td>
+                    <td></td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'CREATE' %} {% trans 'PROJECT' %}</td>
+                    <td></td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                </tr>
+                <tr>
+                    <td>{% trans 'REMOVE' %} {% trans 'PROJECT' %}</td>
+                    <td></td>
+                    <td></td>
+                    <td class="permission-x">✓</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <style>
+        table td.permission-x {
+            background: none repeat scroll 0 0 #D9EDF7 !important;
+            text-align: center;
+        }
+    </style>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends 'projects/configuration_update.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{% url 'projects_project_list' %}">{% trans 'PROJECTS' %}</a></li>
+        <li class="active">Create Configuration</li>
+    </ol>
+{% endblock breadcrumb %}
+
+{% block action %}Add New{% endblock %}
